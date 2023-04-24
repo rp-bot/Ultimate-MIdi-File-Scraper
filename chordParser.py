@@ -248,8 +248,8 @@ def chordScraper(wd):
 # Will only get the data of artists in 'inputArtists'
 def scrapeSongChords(inputArtists):
     option = webdriver.ChromeOptions()
-    option.add_argument('--incognito')
-    wd = webdriver.Chrome('dependencies/chromedriver', options = option)
+    # option.add_argument('--incognito')
+    wd = webdriver.Chrome('dependencies/chromedriver', options = option,)
     scrapeSongs = pd.DataFrame(pd.read_csv("data/scrapeSongs.csv"))
     done = []
     for index, row in scrapeSongs.iterrows():
@@ -403,8 +403,8 @@ def dictToDF(data, song, artist):
 
 
 def main():
-    #inputArtists is the list of artists who show up in the the Artists column 
-    # of 'scrapeSongs.csv' AND we want to actually scrape the songs of
+    """inputArtists is the list of artists who show up in the the Artists column 
+     of 'scrapeSongs.csv' AND we want to actually scrape the songs of"""
     inputArtists =["Ed Sheeran"] #all listed artists must be in scrapeSongs.csv
     scrapeSongChords(inputArtists)
 
