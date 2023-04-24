@@ -1,1 +1,6 @@
+# environments
 .vscode
+.env
+
+# Cache
+__pycache__

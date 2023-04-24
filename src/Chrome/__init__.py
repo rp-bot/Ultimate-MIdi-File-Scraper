@@ -1,0 +1,1 @@
+"""Chrome is a module that handles all logic related to the selenium chromedriver."""
