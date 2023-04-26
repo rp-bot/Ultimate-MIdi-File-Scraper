@@ -1,6 +1,7 @@
 # environments
 .vscode
 .env
+src/Chrome/preferences
 
 # Cache
 __pycache__

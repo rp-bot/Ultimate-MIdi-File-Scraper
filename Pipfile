@@ -9,6 +9,7 @@ pandas = "*"
 numpy = "*"
 bs4 = "*"
 webdriver-manager = "*"
+tqdm = "*"
 
 [dev-packages]
 
