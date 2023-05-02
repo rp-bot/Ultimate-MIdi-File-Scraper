@@ -5,7 +5,7 @@ from pprint import pprint
 
 DRIVER = install_driver()
 
-conn = sqlite3.connect('data/.db/UltimateMidi.sqlite3')
+conn = sqlite3.connect('data/db/UltimateMidi.sqlite3')
 
 
 def add_data(table_name, data):
@@ -40,11 +40,6 @@ def get_genres():
     add_data("genres", genres)
     return genres
 
-# DRIVER.switch_to.window(DRIVER.window_handles[1])
-
-
-# artists = DRIVER.find_elements(By.CLASS_NAME, "genre-band-container")
-# pprint(artists[artist-2].text)
 
 if __name__ == '__main__':
     DRIVER.get("https://freemidi.org/all")
