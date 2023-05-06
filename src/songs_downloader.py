@@ -4,7 +4,6 @@ import time
 import sqlite3
 from tqdm import tqdm
 
-DRIVER = install_driver()
 
 conn = sqlite3.connect('data/db/UltimateMidi.sqlite3')
 c = conn.cursor()
@@ -54,7 +53,7 @@ def make_data(song_names: list, song_urls: list, artist: list, div):
 def download_songs(artists_dict: dict):
     from_7 = artists_dict.items()
     print(type(from_7))
-    for i,genre in tqdm(enumerate(artists_dict.items()), desc="genres: "):
+    for i, genre in tqdm(enumerate(artists_dict.items()), desc="genres: "):
         # loop through each genre
         if i < 6:
             continue
@@ -73,6 +72,7 @@ def download_songs(artists_dict: dict):
 
 
 if __name__ == '__main__':
+    DRIVER = install_driver()
     genre_queries = create_genre_queries()
     artists = get_artists(genre_queries)
     download_songs(artists)
