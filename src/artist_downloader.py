@@ -45,13 +45,20 @@ def create_genre_table(genre_list):
     c.execute(create_table)
 
 
+def create_urls_table(genre_list):
+    create_table = f'''CREATE TABLE IF NOT EXISTS {genre_list[1].translate(STR_TABLE)}_songs ("artist_ID" INTEGER,"artist_name" TEXT,"song_name" TEXT,"song_url" TEXT, FOREIGN KEY("artist_ID") REFERENCES {genre_list[1].translate(STR_TABLE)}("artist_ID"))'''
+    c.execute(create_table)
+
+
 if __name__ == '__main__':
     genres = retrieve_from_genres()
+
     for genre in genres:
         # create_genre_table(genre)
         print(genre)
-        DRIVER.execute_script(f"window.open('{genre[2]}');")
-        add_artists_bands(genre)
+        # DRIVER.execute_script(f"window.open('{genre[2]}');")
+        # add_artists_bands(genre)
+        # create_urls_table(genre)
 
         # pprint(genre)
     c.close()

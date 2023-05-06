@@ -11,9 +11,11 @@ import selenium.common.exceptions as selenium_exceptions
 import selenium.webdriver.chrome.options as selenium_options
 
 
-def install_driver():
+def install_driver(headless=False):
     """recommended: install WebDriver into a global variable"""
     OPTIONS = Options()
+    OPTIONS.add_argument('--headless')
+    OPTIONS.add_argument('--disable-gpu')
     OPTIONS.add_argument(
         "--user-data-dir=./src/Chrome/preferences")
     OPTIONS.page_load_strategy = 'normal'
