@@ -7,7 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
-import selenium.common.exceptions as selenium_exceptions
+from selenium.common.exceptions import NoSuchElementException
 import selenium.webdriver.chrome.options as selenium_options
 
 

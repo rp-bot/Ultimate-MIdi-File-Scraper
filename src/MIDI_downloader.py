@@ -1,8 +1,9 @@
-from Chrome.installer import install_driver, By, ActionChains, Keys
+from Chrome.installer import install_driver, By, ActionChains, Keys, NoSuchElementException
 import time
 import sqlite3
 from pprint import pprint
 from songs_downloader import create_genre_queries
+from tqdm import tqdm
 from lib import STR_TABLE
 
 
@@ -22,32 +23,38 @@ def get_all_urls(genres):
             urls_list = url_db_cursor.fetchall()
             urls_dict.update({genre[1].translate(STR_TABLE): urls_list})
         except sqlite3.OperationalError:
-            pprint(
-                f'No table named: {genre[1].translate(STR_TABLE)}_songs, \nbut the loop continued on')
             continue
 
     return urls_dict
 
 
 def add_dl_urls(data: list):
-    push_command = f'''INSERT OR IGNORE INTO dl_urls (artist_ID, artist_name, song_name,song_url, download_url) VALUES (?, ?, ?, ?, ?)'''
+    push_command = f'''INSERT OR IGNORE INTO dl_urls (artist_ID, artist_name, song_name,song_url, download_url, genre) VALUES (?, ?, ?, ?, ?, ?)'''
+    try:
+        midi_db_cursor.execute(push_command, data)
+        midi_db_conn.commit()
+    except ValueError:
+        pass
 
-    midi_db_cursor.execute(push_command, data)
-    midi_db_conn.commit()
-    print("done")
+
+def get_dl_url(artist: tuple, genre: str):
+    try:
+        DRIVER.get(artist[3])
+        download_link = DRIVER.find_element(
+            By.ID, "downloadmidi").get_attribute("href")
+        return artist+(download_link, genre)
+    except NoSuchElementException:
+        pass
 
 
 def download_MIDI(urls_dict: dict):
-    # for all urls in the dictionary in the given
-    for genre, artists in urls_dict.items():
-        for artist in artists:
-            DRIVER.get(artist[3])
-            download_link = DRIVER.find_element(
-                By.ID, "downloadmidi").get_attribute("href")
+    # Create a queue to store the results
 
-            plus_dl_link = artist+(download_link,)
-            add_dl_urls(plus_dl_link)
-            time.sleep(10)
+    for genre, artists in tqdm(urls_dict.items(), desc="Genres completed: "):
+        if genre != "rock":
+            for i, artist in tqdm(enumerate(artists), desc=f"Artists in {genre} completed: ", leave=False):
+                data = get_dl_url(artist, genre)
+                add_dl_urls(data)
 
 
 if __name__ == '__main__':
@@ -58,7 +65,7 @@ if __name__ == '__main__':
     midi_db_conn = sqlite3.connect('data/db/AllMIDI.sqlite3')
     midi_db_cursor = midi_db_conn.cursor()
 
-    DRIVER = install_driver()
+    DRIVER = install_driver(headless=True)
 
     genres = get_genres()
 
