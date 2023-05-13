@@ -8,8 +8,7 @@ def get_genres():
     DRIVER.get("https://www.midiworld.com/files/")
     genres_div = DRIVER.find_elements(By.CLASS_NAME, "w2")
 
-    genre_names = list(
-        map(lambda genre: genre.text, genres_div))
+    genre_names = list(map(lambda genre: genre.text, genres_div))
 
     genre_urls = list(
         map(lambda genre: genre.get_attribute("href"), genres_div))
