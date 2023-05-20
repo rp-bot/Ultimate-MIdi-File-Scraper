@@ -24,7 +24,7 @@ def install_driver(headless=False, download_mode=False):
     if download_mode:
         OPTIONS.add_experimental_option('prefs', {
             'download.default_directory': MIDI_DATA_DIR,
-            'download.prompt_for_download': True,
+            'download.prompt_for_download': False,
             'download.directory_upgrade': True,
             'safebrowsing.enabled': True
         })
