@@ -5,4 +5,4 @@ Sources:
 - https://www.midiworld.com/
 - https://www.mididb.com/
 
-⚠️ Narrow use case :(, I want to make this more dynamic eventually.
+⚠️ Narrow use case :(, I want to make this dynamic eventually.
