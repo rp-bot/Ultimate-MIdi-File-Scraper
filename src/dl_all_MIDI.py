@@ -38,13 +38,17 @@ def file_organizer(artist_name: str, song_name: str, genre: str):
     os.rename(destination_path, new_destination_path)
 
 
+def dir_cleanup():
+    print("dir")
+
+
 def download_all():
     all_midi = GetData(db="AllMIDI", table_name="dl_urls")
     all_midi_urls_list = all_midi.get_all()
 
     # loop through each url and download.
     for i, artist_i, artist_name, song_name, page_url, download_url, genre in tqdm(all_midi_urls_list, desc="Downloading all midi:"):
-        if i > 4860:  # start from here
+        if i > 6543:  # start from here
             DRIVER.get(page_url)
             time.sleep(1)
             button = DRIVER.find_element(
@@ -58,3 +62,5 @@ if __name__ == '__main__':
     DRIVER = install_driver(headless=True, download_mode=True)
 
     download_all()
+
+    # dir_cleanup()
