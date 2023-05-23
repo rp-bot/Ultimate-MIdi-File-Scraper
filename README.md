@@ -1,8 +1,3 @@
 # Ultimate MIDI Downloader
 
-Sources:
-- https://freemidi.org
-- https://www.midiworld.com/
-- https://www.mididb.com/
-
-⚠️ Narrow use case :(, I want to make this dynamic eventually.
+⚠️ Archived Repo. Use the new [MIDI scraper](https://github.com/rp-bot/Ultimate-MIDI-Scraper).
